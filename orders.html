@@ -10,170 +10,219 @@
     <title>orders Detail page</title>
     <!-- FIREBASE App and firebase firestore insert here -->
     <style>
-      body {
-        background-color: #024558;
-        font-family: "Poppins", "Courier New", Courier, monospace, sans-serif;
-        margin: 0;
-        padding: 0;
-      }
+  body {
+    background-color: #024558;
+    font-family: "Poppins", "Courier New", Courier, monospace, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+  }
 
-      /* ------------------- Sidebar Styling ------------------- */
-      .sidebar {
-        height: 100vh;
-        width: 250px;
-        padding: 25px;
-        background-color: #024558;
-        color: #f8d0a4;
-        position: fixed;
-        top: 0;
-        left: 0;
-        box-shadow: 4px 0px 12px rgba(0, 0, 0, 0.5);
-        overflow-y: auto;
-      }
+  /* Tablets */
+  @media (min-width: 768px) {
+    body { font-size: 16px; }
+  }
 
-      .sidebar h2 {
-        color: #f8d0a4;
-        font-weight: bold;
-        margin-bottom: 25px;
-        font-size: 28px;
-      }
+  /* Laptops / Desktops */
+  @media (min-width: 1024px) {
+    body { font-size: 18px; }
+  }
 
-      .sidebar a {
-        font-size: 20px;
-        color: #ffffff;
-        text-decoration: none;
-        display: block;
-        padding: 12px 0;
-        border-radius: 8px;
-        margin: 5px 10px;
-        transition: 0.3s ease-in-out;
-      }
+  /* ------------------- Sidebar Styling ------------------- */
+  .sidebar {
+    height: 100vh;
+    width: 250px;
+    padding: 25px;
+    background-color: #024558;
+    color: #f8d0a4;
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: 4px 0px 12px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+  }
 
-      .sidebar a:hover {
-        background-color: #f8d0a4;
-        color: #024558;
-        transform: scale(1.05);
-      }
-      /* ------------------- Navbar ------------------- */
-      .navbar {
-        margin: 0px 0px 0px 0px; /* same as sidebar width */
-        background-color: #024558 !important;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
-      }
+  .sidebar h2 {
+    color: #f8d0a4;
+    font-weight: bold;
+    margin-bottom: 25px;
+    font-size: 28px;
+  }
 
-      .navbar-nav .nav-link {
-        color: #f8d0a4 !important;
-        font-size: 18px;
-        font-weight: 500;
-        transition: color 0.3s ease;
-      }
+  .sidebar a {
+    font-size: 20px;
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+    padding: 12px 0;
+    border-radius: 8px;
+    margin: 5px 10px;
+    transition: 0.3s ease-in-out;
+  }
 
-      .navbar .navbar-brand {
-        color: #f8d0a4 !important;
-        font-weight: bold;
-        font-size: 24px;
-      }
+  .sidebar a:hover {
+    background-color: #f8d0a4;
+    color: #024558;
+    transform: scale(1.05);
+  }
 
-      .navbar .navbar-toggler-icon {
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.85)' stroke-linecape='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22' /%3e%3c/svg%3e");
-      }
+  /* ------------------- Navbar ------------------- */
+  .navbar {
+    background-color: #024558 !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+  }
 
-      .navbar-expand-lg .navbar-nav .nav-link {
-        padding: 10px;
-      }
+  .navbar-nav .nav-link {
+    color: #f8d0a4 !important;
+    font-size: 18px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
 
-      a.nav-link {
-        color: #f8d0a4 !important;
-        font-size: 20px;
-        font-weight: 400;
-      }
+  .navbar .navbar-brand {
+    color: #f8d0a4 !important;
+    font-weight: bold;
+    font-size: 24px;
+  }
 
-      li.nav-item:hover {
-        color: white !important;
-        transform: scale(1.05);
-        cursor: pointer;
-      }
+  .navbar .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.85)' stroke-linecape='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22' /%3e%3c/svg%3e");
+  }
 
-      /* ------------------- Main Content ------------------- */
-      .main-content {
-        margin-left: 251px;
-        padding: 2px;
-        min-height: 100vh;
-        background-color: #024558;
-        margin-top: 0px;
-      }
+  .navbar-expand-lg .navbar-nav .nav-link {
+    padding: 10px;
+  }
 
-      .card-header {
-        background-color: #024558;
-        color: #f8d0a4;
-      }
+  a.nav-link {
+    color: #f8d0a4 !important;
+    font-size: 20px;
+    font-weight: 400;
+  }
 
-      h2.mb-0 {
-        font-size: 40px;
-        font-weight: 700;
-      }
+  li.nav-item:hover {
+    color: white !important;
+    transform: scale(1.05);
+    cursor: pointer;
+  }
 
-      .card-body {
-        background-color: #024558;
-      }
+  /* ------------------- Main Content ------------------- */
+  .main-content {
+    margin-left: 251px;
+    padding: 2px;
+    min-height: 100vh;
+    background-color: #024558;
+    margin-top: 0px;
+  }
 
-      table {
-        width: 100%;
-        background: white;
-        border-radius: 10px;
-        overflow: hidden;
-      }
+  .card-header {
+    background-color: #024558;
+    color: #f8d0a4;
+  }
 
-      thead th {
-        background-color: #024558;
-        color: #f8d0a4;
-        font-size: 19px;
-      }
+  h2.mb-0 {
+    font-size: 40px;
+    font-weight: 700;
+  }
 
-      .table-hover tbody tr:hover {
-        background-color: #e0f2f1;
-      }
+  .card-body {
+    background-color: #024558;
+  }
 
-      .badges {
-        font-size: 0.9em;
-      }
+  table {
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+  }
 
-      /* admin image */
-      img.rounded-circle {
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-      }
+  thead th {
+    background-color: #024558;
+    color: #f8d0a4;
+    font-size: 19px;
+  }
 
-      /* Buttons */
-      .btn-info,
-      .btn-primary {
-        background-color: #024558 !important;
-        border: none !important;
-        color: #f8d0a4 !important;
-      }
+  .table-hover tbody tr:hover {
+    background-color: #e0f2f1;
+  }
 
-      .btn-danger {
-        background-color: #b30000 !important;
-        border: none;
-      }
+  .badges {
+    font-size: 0.9em;
+  }
 
-      .btn:hover {
-        transform: scale(1.05);
-        transition: 0.2s;
-      }
-      .highlight {
-        background-color: #fab66d !important;
-        color: #024558 !important;
-      }
+  /* admin image */
+  img.rounded-circle {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  }
 
-      @keyframes fadeout {
-        0% {
-          background-color: goldenrod;
-        }
-        100% {
-          background-color: transparent;
-        }
-      }
-    </style>
+  /* Buttons */
+  .btn-info,
+  .btn-primary {
+    background-color: #024558 !important;
+    border: none !important;
+    color: #f8d0a4 !important;
+  }
+
+  .btn-danger {
+    background-color: #b30000 !important;
+    border: none;
+  }
+
+  .btn:hover {
+    transform: scale(1.05);
+    transition: 0.2s;
+  }
+
+  .highlight {
+    background-color: #fab66d !important;
+    color: #024558 !important;
+  }
+
+  @keyframes fadeout {
+    0% { background-color: goldenrod; }
+    100% { background-color: transparent; }
+  }
+
+  /* ------------------- NEW Responsive Upgrades ------------------- */
+
+  /* Sidebar collapses on mobile */
+  @media (max-width: 767px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+      box-shadow: none;
+    }
+    .main-content {
+      margin-left: 0;
+      padding: 10px;
+    }
+  }
+
+  /* Navbar adjustments on mobile */
+  @media (max-width: 767px) {
+    .navbar .navbar-brand { font-size: 20px; }
+    .navbar-nav .nav-link { font-size: 16px; padding: 8px; }
+  }
+
+  /* Table responsiveness */
+  .table-responsive {
+    overflow-x: auto;
+  }
+
+  /* Responsive headings */
+  @media (max-width: 767px) {
+    h2.mb-0 { font-size: 28px; }
+  }
+  @media (min-width: 768px) and (max-width: 1023px) {
+    h2.mb-0 { font-size: 36px; }
+  }
+
+  /* Fluid images */
+  img.rounded-circle {
+    max-width: 100%;
+    height: auto;
+  }
+</style>
   </head>
 
   <body>
@@ -424,5 +473,6 @@ function renderOrders(list) {
 
     loadOrders();
   </script>
+  <script src="main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </html>

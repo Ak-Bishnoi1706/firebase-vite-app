@@ -222,11 +222,6 @@
                     >My Profile</a
                   >
                 </li>
-                <li>
-                  <a class="dropdown-item" href="signIn.html" id="signinBtn"
-                    >Sign In</a
-                  >
-                </li>
                 <li><hr class="dropdown-divider" /></li>
                 <li>
                   <a class="dropdown-item text-danger" href="#" id="logoutBtn"
@@ -330,7 +325,7 @@
     document.getElementById("logoutBtn").addEventListener('click', function (e) {
         e.preventDefault();
         alert("You have been Logged out successfully!");
-        window.location.href = "signIn.html";
+        window.location.href = "index.html";
       });
 
     /*get customer id from URL */
@@ -353,49 +348,47 @@
     }
 
     /* Render orders into table */
-    function renderOrders(list) {
-      const tableBody = document.getElementById("orderTableBody");
-      tableBody.innerHTML = "";
+function renderOrders(list) {
+  const tableBody = document.getElementById("orderTableBody");
+  tableBody.innerHTML = "";
 
-      list.forEach(order => {
-        const row = document.getElementById('orderTableBody');
-        row.innerHTML = `
-        <tr>
-            <td>${order.id}</td>
-            <td>${order.customer || "Unknown"}</td>
-            <td>${order.product}</td>
-            <td>${order.date}</td>
-            <td>${order.status}</td>
-            <td>₹${order.total}</td>
-            <td>
-                <select onchange="updateStatus('${order.id}', this.value)">
-                  <option ${order.status === "Pending" ? "selected" : ""}>Pending</option>
-                  <option ${order.status === "Shipped" ? "selected" : ""}>Shipped</option>                  
-                  <option ${order.status === "Delivered" ? "selected" : ""}>Delivered</option>                                   
-                  <option ${order.status === "Cancelled" ? "selected" : ""}>Cancelled</option>                                   
-                </select>
-                <button class="btn btn-sm btn-danger" onclick="deleteOrders('${order.id}')">Delete</button>
-                <button onclick="viewCustomer('${order.customerId}')" class="btn btn-outline-primary btn-sm">View</button>
-            </td>
-          </tr>`;
+  list.forEach(order => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${order.id}</td>
+      <td>${order.customer || "Unknown"}</td>
+      <td>${order.product}</td>
+      <td>${order.date}</td>
+      <td>${order.status}</td>
+      <td>₹${order.total}</td>
+      <td>
+        <select>
+          <option ${order.status === "Pending" ? "selected" : ""}>Pending</option>
+          <option ${order.status === "Shipped" ? "selected" : ""}>Shipped</option>
+          <option ${order.status === "Delivered" ? "selected" : ""}>Delivered</option>
+          <option ${order.status === "Cancelled" ? "selected" : ""}>Cancelled</option>
+        </select>
+        <button class="btn btn-sm btn-danger">Delete</button>
+        <button class="btn btn-outline-primary btn-sm">View</button>
+      </td>
+    `;
 
-        /*HIghlight rows for the selected customer */
-        if (order.customerId === customerId) {
-          row.classList.add("highlight");
-          /* Remove after 3 sec */
-          setTimeout(() => {
-            row.classList.remove("highlight");
-          }, 3000);
-        }
-        console.log('tableBody:', tableBody);
-        console.log('row:', row);
-        console.log('Are they the same element?', tableBody === row);
-        // Check if 'row' is an ancestor of 'tableBody' (less likely in this specific append scenario)
-        console.log('Does tableBody contain row?', tableBody.contains(row));
-        tableBody.appendChild(row);
+    // Bind events
+    row.querySelector("select").addEventListener("change", e => {
+      updateStatus(order.id, e.target.value);
+    });
 
-      });
-    };
+    row.querySelector(".btn-danger").addEventListener("click", () => {
+      deleteOrders(order.id);
+    });
+
+    row.querySelector(".btn-outline-primary").addEventListener("click", () => {
+      viewCustomer(order.customerId);
+    });
+
+    tableBody.appendChild(row);
+  });
+}
 
     /*Search input */
     function filterOrders() {

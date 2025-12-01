@@ -200,7 +200,6 @@
               </a>
               <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminProfile">
                 <li><a class="dropdown-item" href="index.html#adminProfile">My Profile</a></li>
-                <li><a class="dropdown-item" href="signIn.html" id="signinBtn">Sign In</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item text-danger" href="#" id="logoutBtn">Logout</a></li>
               </ul>
@@ -287,7 +286,7 @@
   document.getElementById("logoutBtn").addEventListener("click", e => {
     e.preventDefault();
     alert("You have been Logged out successfully!");
-    window.location.href = "signIn.html";
+    window.location.href = "index.html";
   });
 
   // Fetch customers
